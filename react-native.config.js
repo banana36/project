@@ -1,19 +1,19 @@
 module.exports = {
   project: {
     ios: {},
-    android: {}, // grouped into "project"
+    android: {} // grouped into "project"
   },
   dependencies: {
-    '@react-native-community/google-signin': {
+    "@react-native-community/google-signin": {
       platforms: {
-        ios: null,
-      },
+        ios: null
+      }
     },
-    'react-native-fbsdk': {
+    "react-native-fbsdk": {
       platforms: {
-        ios: null,
-      },
-    },
+        ios: null
+      }
+    }
   },
-  assets: ['./assets/fonts/'], // stays the same
+  assets: ["./src/assets/fonts/"] // stays the same
 };
