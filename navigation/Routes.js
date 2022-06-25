@@ -1,18 +1,34 @@
-import React, {useContext, useState, useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import auth from '@react-native-firebase/auth';
-import {AuthContext} from './AuthProvider';
-
-import AuthStack from './AuthStack';
-import AppStack from './AppStack';
+import React, { useContext, useState, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import auth from "@react-native-firebase/auth";
+import { AuthContext } from "./AuthProvider";
+import firestore from "@react-native-firebase/firestore";
+import AuthStack from "./AuthStack";
+import PTStack from "./PTStack";
+import ClientStack from "./ClientStack";
 
 const Routes = () => {
-  const {user, setUser} = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
+  const [userData, setUserData] = useState(null);
+
+  const typePT = userData?.userType === "PT";
 
   const onAuthStateChanged = (user) => {
     setUser(user);
     if (initializing) setInitializing(false);
+  };
+
+  const getUser = async () => {
+    await firestore()
+      .collection("users")
+      .doc(user.uid)
+      .get()
+      .then((documentSnapshot) => {
+        if (documentSnapshot.exists) {
+          setUserData(documentSnapshot.data());
+        }
+      });
   };
 
   useEffect(() => {
@@ -24,7 +40,7 @@ const Routes = () => {
 
   return (
     <NavigationContainer>
-      {user ? <AppStack /> : <AuthStack />}
+      {user ? typePT ? <PTStack /> : <ClientStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };
