@@ -12,6 +12,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import AddPostScreen from "../screens/AddPostScreen";
 import MessagesScreen from "../screens/MessagesScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
+import SearchPtScreen from "../screens/SearchPt";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -126,6 +127,32 @@ const ProfileStack = ({ navigation }) => (
   </Stack.Navigator>
 );
 
+const SearchPtStack = ({ navigation }) => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="SearchPT"
+      component={SearchPtScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+    {/* <Stack.Screen
+      name="EditProfile"
+      component={EditProfileScreen}
+      options={{
+        headerTitle: "Edit Profile",
+        headerBackTitleVisible: false,
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: "#fff",
+          shadowColor: "#fff",
+          elevation: 0
+        }
+      }}
+    /> */}
+  </Stack.Navigator>
+);
+
 const ClientStack = () => {
   const getTabBarVisibility = (route) => {
     const routeName = route.state
@@ -177,7 +204,7 @@ const ClientStack = () => {
           )
         })}
       /> */}
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Calendario"
         component={ProfileStack}
         options={{
@@ -188,15 +215,15 @@ const ClientStack = () => {
         }}
       />
       <Tab.Screen
-        name="Clienti"
-        component={ProfileStack}
+        name="Ricerca"
+        component={SearchPtStack}
         options={{
           // tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />
           )
         }}
-      /> */}
+      />
       <Tab.Screen
         name="Profile"
         component={ProfileStack}
