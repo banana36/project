@@ -7,6 +7,7 @@ import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { commonStyles, palette } from "../../theme";
 import Container from "./Container";
+import Header from "./Header";
 import PrimaryButton from "./PrimaryButton";
 
 const Page = ({
@@ -130,7 +131,7 @@ const Page = ({
           translucent={true}
         />
       )}
-      {/* {!!hasHeader && (
+      {!!hasHeader && (
         <Header
           hideLogo={!!headerProps?.hideLogo}
           isWhiteLogo={!!headerProps?.isWhiteLogo}
@@ -147,7 +148,7 @@ const Page = ({
           title={headerProps?.title}
           isLogin={isLogin}
         />
-      )} */}
+      )}
       <KeyboardAwareScrollView
         contentContainerStyle={[
           styles.contentContainerStyle,

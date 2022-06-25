@@ -5,9 +5,9 @@ import FormInput from "./FormInput";
 import PostCard from "./PostCard";
 import ProgressiveImage from "./ProgressiveImage";
 import SocialButton from "./SocialButton";
-// import Header from "./Header";
+import Header from "./Header";
 // import Spacer from "./Spacer";
-// import IconWithText from "./IconWithText";
+import IconWithText from "./IconWithText";
 import PrimaryButton from "./PrimaryButton";
 // import Lottie from "./Lottie";
 // import HR from "./HR";
@@ -26,9 +26,9 @@ export {
   SocialButton,
   Container,
   Page,
-  // Header,
+  Header,
   // Spacer,
-  // IconWithText,
+  IconWithText,
   PrimaryButton
   // Lottie,
   // HR,

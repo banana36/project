@@ -91,13 +91,13 @@ Text.propTypes = {
 
 const styles = StyleSheet.create({
   fontFamilyRegular: {
-    fontFamily: "Everett-Regular"
+    fontFamily: "Lato-Regular"
   },
   textColor: {
     color: "black"
   },
-  fontFamilyBold: { fontFamily: "Everett-Medium" },
-  fontFamilyLight: { fontFamily: "Everett-Light" },
+  fontFamilyBold: { fontFamily: "Kufam-SemiBoldItalic" },
+  fontFamilyLight: { fontFamily: "Kufam-SemiBoldItalic" },
   textAlignCenter: { textAlign: "center" },
   textAlignRight: { textAlign: "right" },
   textDecorationUnderline: {

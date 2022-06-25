@@ -4,6 +4,7 @@ import React from "react";
 import firestore from "@react-native-firebase/firestore";
 import storage from "@react-native-firebase/storage";
 import { Title } from "@components/typography";
+import { Page } from "@components/common";
 
 const Posts = [
   {
@@ -202,9 +203,9 @@ const SearchPtScreen = ({ navigation }) => {
 
   return (
     <>
-      {/* <Page> */}
-      <Title text={"wrfrwf"} />
-      {/* </Page> */}
+      <Page hasHeader>
+        <Title text={"wrfrwf"} />
+      </Page>
     </>
 
     // <SafeAreaView style={{ flex: 1 }}>
