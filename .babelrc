@@ -1,0 +1,16 @@
+{
+    "plugins": [
+      ["module-resolver", {
+        "alias": {
+          "@components": "./src/components",
+          "@assets": "./src/assets",
+          "@screens": "./src/screens",
+          "@utils": "./src/utils",
+          "@theme": "./src/theme",
+          "@navigation": "./src/navigation",
+          "@styles": "./src/styles",
+          "@core": "./src/core"
+        }
+      }]
+    ]
+  }

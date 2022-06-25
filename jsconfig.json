@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+      "jsx": "react",
+      "baseUrl": "./src",
+      "paths": { 
+        "@components/*": [
+          "./components/*"
+        ],
+        "@assets/*": [
+          "./assets/*"
+        ],
+        "@screens/*": [
+          "./screens/*"
+        ],
+        "@utils/*": [
+          "./utils/*"
+        ],
+        "@theme/*": [
+          "./theme/*"
+        ],
+        "@navigation/*": [
+          "./navigation/*"
+        ],
+        "@styles/*": [
+          "./styles/*"
+        ],
+        "@core/*": [
+          "./core/*"
+        ],
+      }
+    },
+    "exclude": [
+      "node_modules"
+    ],
+  }

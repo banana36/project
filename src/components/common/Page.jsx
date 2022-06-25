@@ -1,16 +1,12 @@
-import { Label } from "@components/typography";
+import { NavigationHelper } from "@core/navigator";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { DimensionsUtils } from "@utils/dimensions";
 import PropTypes from "prop-types";
 import React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import AnimatedLoader from "react-native-animated-loader";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { DimensionsUtils } from "../../core/dimensions";
-import { NavigationHelper } from "../../core/navigator";
 import { commonStyles, palette } from "../../theme";
 import Container from "./Container";
-import { ErrorToast } from "./error/ErrorToast";
-import Header from "./Header";
 import PrimaryButton from "./PrimaryButton";
 
 const Page = ({
@@ -134,7 +130,7 @@ const Page = ({
           translucent={true}
         />
       )}
-      {!!hasHeader && (
+      {/* {!!hasHeader && (
         <Header
           hideLogo={!!headerProps?.hideLogo}
           isWhiteLogo={!!headerProps?.isWhiteLogo}
@@ -151,7 +147,7 @@ const Page = ({
           title={headerProps?.title}
           isLogin={isLogin}
         />
-      )}
+      )} */}
       <KeyboardAwareScrollView
         contentContainerStyle={[
           styles.contentContainerStyle,
@@ -195,7 +191,7 @@ const Page = ({
           <>{children}</>
         )}
       </KeyboardAwareScrollView>
-      {!!hasLoader && (
+      {/* {!!hasLoader && (
         <>
           <AnimatedLoader
             visible={loaderProps.visible}
@@ -214,8 +210,8 @@ const Page = ({
             />
           </AnimatedLoader>
         </>
-      )}
-      {hasErrorToast && (
+      )} */}
+      {/* {hasErrorToast && (
         <>
           {!!errorToastProps?.message && (
             <ErrorToast
@@ -225,7 +221,7 @@ const Page = ({
             />
           )}
         </>
-      )}
+      )} */}
     </Container>
   );
 };

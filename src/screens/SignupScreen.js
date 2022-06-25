@@ -6,10 +6,8 @@ import {
   Platform,
   StyleSheet
 } from "react-native";
-import FormInput from "../components/FormInput";
-import FormButton from "../components/FormButton";
-import SocialButton from "../components/SocialButton";
 import { AuthContext } from "../navigation/AuthProvider";
+import { FormInput, FormButton, SocialButton } from "@components/common";
 
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState();

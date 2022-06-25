@@ -1,5 +1,10 @@
-// import Container from "./Container";
+import Container from "./Container";
 import Page from "./Page";
+import FormButton from "./FormButton";
+import FormInput from "./FormInput";
+import PostCard from "./PostCard";
+import ProgressiveImage from "./ProgressiveImage";
+import SocialButton from "./SocialButton";
 // import Header from "./Header";
 // import Spacer from "./Spacer";
 // import IconWithText from "./IconWithText";
@@ -14,7 +19,12 @@ import PrimaryButton from "./PrimaryButton";
 // import PreFilledWithIcon from "./PreFilledWithIcon";
 
 export {
-  // Container,
+  FormButton,
+  FormInput,
+  PostCard,
+  ProgressiveImage,
+  SocialButton,
+  Container,
   Page,
   // Header,
   // Spacer,

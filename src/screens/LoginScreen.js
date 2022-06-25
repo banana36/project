@@ -1,3 +1,4 @@
+import { FormButton, FormInput, SocialButton } from "@components/common";
 import React, { useContext, useState } from "react";
 import {
   View,
@@ -8,9 +9,6 @@ import {
   StyleSheet,
   ScrollView
 } from "react-native";
-import FormInput from "../components/FormInput";
-import FormButton from "../components/FormButton";
-import SocialButton from "../components/SocialButton";
 import { AuthContext } from "../navigation/AuthProvider";
 
 const LoginScreen = ({ navigation }) => {

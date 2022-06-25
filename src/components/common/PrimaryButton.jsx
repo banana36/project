@@ -1,12 +1,10 @@
+import { palette } from "@theme/palette";
+import { DimensionsUtils } from "@utils/dimensions";
 import PropTypes from "prop-types";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { DimensionsUtils } from "../../core/dimensions";
-import { palette } from "../../theme";
-import { Icon } from "../icons";
-import { Subtitle, Text, Tiny } from "../typography";
-import Lottie from "./Lottie";
+import { Text } from "../typography";
 
 const PrimaryButton = ({
   buttonStyleName,
@@ -114,44 +112,44 @@ const PrimaryButton = ({
             onPress={onPress}
             underlayColor={"transparent"}
           >
-            {!!isAnimationActive ? (
+            {/* {!!isAnimationActive ? (
               <Lottie name={getButtonStyle().animationName}></Lottie>
-            ) : (
-              <View style={[styles.flexDirectionRow]}>
-                <View flex={1}>
-                  <Text
-                    containerStyle={styles.subtitle}
-                    regular
-                    noLineHeight
-                    center={!iconName}
-                    right={right}
-                    color={getButtonStyle().titleColor}
-                    fontSize={titleSize}
-                  >
-                    {title}
-                  </Text>
+            ) : ( */}
+            <View style={[styles.flexDirectionRow]}>
+              <View flex={1}>
+                <Text
+                  containerStyle={styles.subtitle}
+                  regular
+                  noLineHeight
+                  center={!iconName}
+                  right={right}
+                  color={getButtonStyle().titleColor}
+                  fontSize={titleSize}
+                >
+                  {title}
+                </Text>
 
-                  {subTitle && (
-                    <Text
-                      paddingRight={DimensionsUtils.getDP(16)}
-                      regular
-                      color={getButtonStyle().subTitleColor}
-                      textAlign={"left"}
-                      fontSize={descriptionSize}
-                    >
-                      {subTitle}
-                    </Text>
-                  )}
-                </View>
-                {!!iconName && (
-                  <Icon
-                    name={iconName}
-                    size={iconDimension}
-                    color={getButtonStyle().iconColor}
-                  />
+                {subTitle && (
+                  <Text
+                    paddingRight={DimensionsUtils.getDP(16)}
+                    regular
+                    color={getButtonStyle().subTitleColor}
+                    textAlign={"left"}
+                    fontSize={descriptionSize}
+                  >
+                    {subTitle}
+                  </Text>
                 )}
               </View>
-            )}
+              {/* {!!iconName && (
+                <Icon
+                  name={iconName}
+                  size={iconDimension}
+                  color={getButtonStyle().iconColor}
+                />
+              )} */}
+            </View>
+            {/* // )} */}
           </TouchableOpacity>
         </View>
       )}
