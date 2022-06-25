@@ -178,6 +178,16 @@ const PTStack = () => {
         })}
       /> */}
       <Tab.Screen
+        name="Clienti"
+        component={ProfileStack}
+        options={{
+          // tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" color={color} size={size} />
+          )
+        }}
+      />
+      <Tab.Screen
         name="Calendario"
         component={ProfileStack}
         options={{
@@ -188,7 +198,7 @@ const PTStack = () => {
         }}
       />
       <Tab.Screen
-        name="Clienti"
+        name="Notifiche"
         component={ProfileStack}
         options={{
           // tabBarLabel: 'Home',
