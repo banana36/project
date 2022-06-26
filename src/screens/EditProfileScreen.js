@@ -1,27 +1,28 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
+  Alert,
   ImageBackground,
-  TextInput,
+  Platform,
   StyleSheet,
-  Alert
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from "react-native";
 
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+import ImagePicker from "react-native-image-crop-picker";
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
-import ImagePicker from "react-native-image-crop-picker";
 
-import { AuthContext } from "../navigation/AuthProvider";
+import { FormButton } from "@components/common";
 import firestore from "@react-native-firebase/firestore";
 import storage from "@react-native-firebase/storage";
-import { FormButton } from "@components/common";
+import { AuthContext } from "../navigation/AuthProvider";
 
 const EditProfileScreen = () => {
   const { user, logout } = useContext(AuthContext);

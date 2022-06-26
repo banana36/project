@@ -9,6 +9,7 @@ import Header from "./Header";
 // import Spacer from "./Spacer";
 import IconWithText from "./IconWithText";
 import PrimaryButton from "./PrimaryButton";
+import PtCard from "./PtCard";
 // import Lottie from "./Lottie";
 // import HR from "./HR";
 // import DynamicModal from "./DynamicModal";
@@ -19,6 +20,7 @@ import PrimaryButton from "./PrimaryButton";
 // import PreFilledWithIcon from "./PreFilledWithIcon";
 
 export {
+  PtCard,
   FormButton,
   FormInput,
   PostCard,

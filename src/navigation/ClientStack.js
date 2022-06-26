@@ -1,18 +1,19 @@
-import React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { createStackNavigator } from "@react-navigation/stack";
+import PtProfileScreen from "@screens/PtProfileScreen";
+import React from "react";
+import { View } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import HomeScreen from "../screens/HomeScreen";
-import ChatScreen from "../screens/ChatScreen";
-import ProfileScreen from "../screens/ProfileScreen";
 import AddPostScreen from "../screens/AddPostScreen";
-import MessagesScreen from "../screens/MessagesScreen";
+import ChatScreen from "../screens/ChatScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
-import SearchPtScreen from "../screens/SearchPt";
+import HomeScreen from "../screens/HomeScreen";
+import MessagesScreen from "../screens/MessagesScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import SearchPtScreen from "../screens/SearchPtScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -136,33 +137,32 @@ const SearchPtStack = ({ navigation }) => (
         headerShown: false
       }}
     />
-    {/* <Stack.Screen
-      name="EditProfile"
-      component={EditProfileScreen}
+    <Stack.Screen
+      name="PTProfile"
+      component={PtProfileScreen}
       options={{
-        headerTitle: "Edit Profile",
-        headerBackTitleVisible: false,
-        headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: "#fff",
-          shadowColor: "#fff",
-          elevation: 0
-        }
+        headerShown: false
       }}
-    /> */}
+    />
   </Stack.Navigator>
 );
 
+const getActiveRouteName = (route) => {
+  if (route?.state) {
+    return getActiveRouteName(route?.state?.routes?.[route?.state?.index]);
+  }
+  return route?.name;
+};
+
 const ClientStack = () => {
   const getTabBarVisibility = (route) => {
-    const routeName = route.state
-      ? route.state.routes[route.state.index].name
-      : "";
+    const routeName = getActiveRouteName(route);
+    console.log("DEBUG::  ~ routeName", routeName);
 
-    if (routeName === "Chat") {
-      return false;
+    if (routeName === "SearchPT") {
+      return true;
     }
-    return true;
+    return false;
   };
 
   return (
@@ -217,12 +217,13 @@ const ClientStack = () => {
       <Tab.Screen
         name="Ricerca"
         component={SearchPtStack}
-        options={{
+        options={({ route }) => ({
+          tabBarVisible: getTabBarVisibility(route),
           // tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />
           )
-        }}
+        })}
       />
       <Tab.Screen
         name="Profile"

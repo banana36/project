@@ -9,7 +9,8 @@
           "@theme": "./src/theme",
           "@navigation": "./src/navigation",
           "@styles": "./src/styles",
-          "@core": "./src/core"
+          "@core": "./src/core",
+          "@actions": "./src/actions"
         }
       }]
     ]

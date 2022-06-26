@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import auth from "@react-native-firebase/auth";
-import { AuthContext } from "./AuthProvider";
 import firestore from "@react-native-firebase/firestore";
+import { AuthContext } from "./AuthProvider";
 import AuthStack from "./AuthStack";
 import PTStack from "./PTStack";
 import ClientStack from "./ClientStack";
@@ -16,8 +16,8 @@ const Routes = () => {
   const typePT = userData?.typeUser === "PT";
   console.log("DEBUG::  ~ typePT", typePT);
 
-  const onAuthStateChanged = (user) => {
-    setUser(user);
+  const onAuthStateChanged = (item) => {
+    setUser(item);
     if (initializing) setInitializing(false);
   };
 

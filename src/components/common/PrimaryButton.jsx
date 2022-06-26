@@ -7,92 +7,18 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Text } from "../typography";
 
 const PrimaryButton = ({
-  buttonStyleName,
   title,
   titleColor,
-  subTitle,
-  subTitleColor,
   onPress,
   buttonColor,
   buttonBorderColor,
-  iconName,
-  iconDimension,
-  iconColor,
   disabled = false,
   isAnimationActive = false,
-  animationName = "blackLoader",
+  // animationName = "blackLoader",
   containerStyle,
   right,
-  titleSize = 22,
-  descriptionSize = 12
+  titleSize = 22
 }) => {
-  const getButtonStyle = () => {
-    switch (buttonStyleName) {
-      case "primary":
-        return {
-          backgroundColor: palette.blue,
-          buttonBorderColor: palette.blue,
-          titleColor: palette.white,
-          subTitleColor: palette.black,
-          iconColor: palette.white,
-          animationName: "whiteLoader"
-        };
-      case "secondary":
-        return {
-          backgroundColor: palette.white,
-          buttonBorderColor: palette.black,
-          titleColor: palette.black,
-          subTitleColor: palette.black,
-          iconColor: palette.black,
-          animationName
-        };
-      case "tertiary":
-        return {
-          backgroundColor: palette.white,
-          buttonBorderColor: palette.white,
-          titleColor: palette.black,
-          subTitleColor: palette.black,
-          iconColor: palette.black,
-          animationName
-        };
-      case "power":
-        return {
-          backgroundColor: palette.yellow,
-          buttonBorderColor: palette.yellow,
-          titleColor: palette.black,
-          subTitleColor: palette.black,
-          iconColor: palette.black,
-          animationName
-        };
-      case "gas":
-        return {
-          backgroundColor: palette.waterGreen,
-          buttonBorderColor: palette.waterGreen,
-          titleColor: palette.black,
-          subTitleColor: palette.black,
-          iconColor: palette.black,
-          animationName
-        };
-      case "dual":
-        return {
-          backgroundColor: palette.blue,
-          buttonBorderColor: palette.blue,
-          titleColor: palette.white,
-          subTitleColor: palette.white,
-          iconColor: palette.white,
-          animationName: "whiteLoader"
-        };
-      default:
-        return {
-          backgroundColor: buttonColor || palette.white,
-          buttonBorderColor: buttonBorderColor || palette.black,
-          titleColor: titleColor || palette.black,
-          subTitleColor: subTitleColor || palette.black,
-          iconColor: iconColor || palette.black,
-          animationName
-        };
-    }
-  };
   return (
     <>
       {!!title && !!onPress && (
@@ -106,8 +32,8 @@ const PrimaryButton = ({
             disabled={disabled}
             style={[
               styles.containerStyle,
-              { backgroundColor: getButtonStyle().backgroundColor },
-              { borderColor: getButtonStyle().buttonBorderColor }
+              { backgroundColor: buttonColor || palette.white },
+              { borderColor: buttonBorderColor || palette.black }
             ]}
             onPress={onPress}
             underlayColor={"transparent"}
@@ -121,25 +47,13 @@ const PrimaryButton = ({
                   containerStyle={styles.subtitle}
                   regular
                   noLineHeight
-                  center={!iconName}
+                  center
                   right={right}
-                  color={getButtonStyle().titleColor}
+                  color={titleColor || palette.black}
                   fontSize={titleSize}
                 >
                   {title}
                 </Text>
-
-                {subTitle && (
-                  <Text
-                    paddingRight={DimensionsUtils.getDP(16)}
-                    regular
-                    color={getButtonStyle().subTitleColor}
-                    textAlign={"left"}
-                    fontSize={descriptionSize}
-                  >
-                    {subTitle}
-                  </Text>
-                )}
               </View>
               {/* {!!iconName && (
                 <Icon
