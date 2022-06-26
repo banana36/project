@@ -1,19 +1,19 @@
-import React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-
-import HomeScreen from "../screens/HomeScreen";
-import ChatScreen from "../screens/ChatScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import AddPostScreen from "../screens/AddPostScreen";
-import MessagesScreen from "../screens/MessagesScreen";
-import EditProfileScreen from "../screens/EditProfileScreen";
-import MyClientScreen from "@screens/MyClientScreen";
+import { createStackNavigator } from "@react-navigation/stack";
 import ClientProfileScreen from "@screens/ClientProfileScreen";
+import MyClientScreen from "@screens/MyClientScreen";
+import PtCalendarScreen from "@screens/PtCalendarScreen";
+import React from "react";
+import { View } from "react-native";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import AddPostScreen from "../screens/AddPostScreen";
+import ChatScreen from "../screens/ChatScreen";
+import EditProfileScreen from "../screens/EditProfileScreen";
+import HomeScreen from "../screens/HomeScreen";
+import MessagesScreen from "../screens/MessagesScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -147,6 +147,18 @@ const ClientStack = () => (
   </Stack.Navigator>
 );
 
+const CalendarStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="PtCalendar"
+      component={PtCalendarScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+  </Stack.Navigator>
+);
+
 const getActiveRouteName = (route) => {
   if (route?.state) {
     return getActiveRouteName(route?.state?.routes?.[route?.state?.index]);
@@ -216,7 +228,7 @@ const PTStack = () => {
       />
       <Tab.Screen
         name="Calendario"
-        component={ProfileStack}
+        component={CalendarStack}
         options={{
           // tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
