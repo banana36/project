@@ -1,0 +1,85 @@
+{
+  // root: true,
+  // extends: '@react-native-community',
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["airbnb-base", "prettier", "plugin:react/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-irregular-whitespace": "error",
+    "no-useless-escape": "error",
+    "no-redeclare": "error",
+    "no-fallthrough": "error",
+    "no-extra-semi": "error",
+    "no-duplicate-case": "error",
+    "no-constant-condition": "error",
+    "no-empty-pattern": "error",
+    "no-dupe-class-members": "error",
+    "no-sparse-arrays": "error",
+    "no-cond-assign": "error",
+    "no-unreachable": "error",
+    "no-func-assign": "error",
+    "no-prototype-builtins": "error",
+    "no-empty": "error",
+    "no-control-regex": "error",
+    "no-case-declarations": "error",
+    "no-dupe-else-if": "error",
+    "no-undef": "error",
+    "no-self-assign": "error",
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-key": "error",
+    "react/jsx-no-undef": "error",
+    "react/react-in-jsx-scope": "error",
+    "react-native/split-platform-components": 0,
+    "react-native/no-inline-styles": 0,
+
+    // deactivated rules
+    "no-extra-boolean-cast": "off", //it's useless 'cause it's throw error also with nullish operator (!!)
+    "react/prop-types": 0,
+    "react/display-name": "off",
+    "react-native/no-unused-styles": "off",
+
+    "prettier/prettier": 0,
+    "no-empty-interface": "off",
+    "no-use-before-define": 0,
+    "eqeqeq": 0,
+    "eslint-disable-next-line": 0,
+    "no-console": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
+    "radix": "off",
+    "class-methods-use-this": "off",
+    "global-require": 0,
+    "cognitive-complexity": "off",
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0
+  },
+  "plugins": ["prettier"],
+  // "ignorePatterns": ["**/*.js"]
+  "ignorePatterns": [
+    "assets/*",
+    "android/*",
+    "ios/*",
+    "*/*/*/*/__tests__/*",
+    "__tests__/*"
+  ]
+}

@@ -3,8 +3,10 @@ import { Alert } from "react-native";
 import React from "react";
 import firestore from "@react-native-firebase/firestore";
 import storage from "@react-native-firebase/storage";
-import { Title } from "@components/typography";
-import { Page } from "@components/common";
+import { Label, Title } from "@components/typography";
+import { FormInput, Page, PostCard } from "@components/common";
+import Spacer from "@components/common/Spacer";
+import { FlatList } from "react-native-gesture-handler";
 
 const Posts = [
   {
@@ -70,53 +72,43 @@ const Posts = [
 ];
 
 const SearchPtScreen = ({ navigation }) => {
-  const [posts, setPosts] = useState(null);
+  const [listPT, setListPT] = useState(null);
+  console.log("DEBUG::  ~ listPT", listPT);
   const [loading, setLoading] = useState(true);
   const [deleted, setDeleted] = useState(false);
+  const [value, setValue] = useState("");
 
   const fetchPosts = async () => {
     try {
       const list = [];
 
       await firestore()
-        .collection("posts")
-        .orderBy("postTime", "desc")
+        .collection("users")
+        // .orderBy("postTime", "desc")
         .get()
         .then((querySnapshot) => {
-          // console.log('Total Posts: ', querySnapshot.size);
+          console.log("Total Posts: ", querySnapshot.size);
 
-          querySnapshot.forEach((doc) => {
-            const {
-              userId,
-              post,
-              postImg,
-              postTime,
-              likes,
-              comments
-            } = doc.data();
-            list.push({
-              id: doc.id,
-              userId,
-              userName: "Test Name",
-              userImg:
-                "https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg",
-              postTime: postTime,
-              post,
-              postImg,
-              liked: false,
-              likes,
-              comments
-            });
+          querySnapshot.forEach((users) => {
+            const { email, fname, lname, typeUser } = users.data();
+            if (typeUser === "PT") {
+              list.push({
+                email,
+                fname,
+                lname,
+                typeUser
+              });
+            }
           });
         });
 
-      setPosts(list);
+      setListPT(list);
 
       if (loading) {
         setLoading(false);
       }
 
-      console.log("Posts: ", posts);
+      console.log("Posts: ", listPT);
     } catch (e) {
       console.log(e);
     }
@@ -131,80 +123,26 @@ const SearchPtScreen = ({ navigation }) => {
     setDeleted(false);
   }, [deleted]);
 
-  const handleDelete = (postId) => {
-    Alert.alert(
-      "Delete post",
-      "Are you sure?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed!"),
-          style: "cancel"
-        },
-        {
-          text: "Confirm",
-          onPress: () => deletePost(postId)
-        }
-      ],
-      { cancelable: false }
-    );
-  };
-
-  const deletePost = (postId) => {
-    console.log("Current Post Id: ", postId);
-
-    firestore()
-      .collection("posts")
-      .doc(postId)
-      .get()
-      .then((documentSnapshot) => {
-        if (documentSnapshot.exists) {
-          const { postImg } = documentSnapshot.data();
-
-          if (postImg != null) {
-            const storageRef = storage().refFromURL(postImg);
-            const imageRef = storage().ref(storageRef.fullPath);
-
-            imageRef
-              .delete()
-              .then(() => {
-                console.log(`${postImg} has been deleted successfully.`);
-                deleteFirestoreData(postId);
-              })
-              .catch((e) => {
-                console.log("Error while deleting the image. ", e);
-              });
-            // If the post image is not available
-          } else {
-            deleteFirestoreData(postId);
-          }
-        }
-      });
-  };
-
-  const deleteFirestoreData = (postId) => {
-    firestore()
-      .collection("posts")
-      .doc(postId)
-      .delete()
-      .then(() => {
-        Alert.alert(
-          "Post deleted!",
-          "Your post has been deleted successfully!"
-        );
-        setDeleted(true);
-      })
-      .catch((e) => console.log("Error deleting posst.", e));
-  };
-
-  // const ListHeader = () => {
-  //   return null;
-  // };
-
   return (
     <>
-      <Page hasHeader>
-        <Title text={"wrfrwf"} />
+      <Page>
+        <Title text={"wrfrwf"} center />
+        <Spacer />
+        <FormInput
+          labelValue={value}
+          onChangeText={(text) => setValue(text)}
+          placeholderText="Tipologia Cliente"
+          iconType="user"
+        />
+        <Spacer />
+        <FlatList
+          data={listPT}
+          renderItem={({ item }) => (
+            <Label text={item.fname + " " + item.lname} />
+          )}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
+        />
       </Page>
     </>
 
