@@ -10,7 +10,6 @@ export const getAllPt = async (cb) => {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((users) => {
-          console.log("DEBUG::  ~ users", users);
           const { email, fname, lname, typeUser } = users.data();
           if (typeUser === "PT") {
             list.push({

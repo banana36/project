@@ -157,7 +157,6 @@ const getActiveRouteName = (route) => {
 const ClientStack = () => {
   const getTabBarVisibility = (route) => {
     const routeName = getActiveRouteName(route);
-    console.log("DEBUG::  ~ routeName", routeName);
 
     if (routeName === "SearchPT") {
       return true;

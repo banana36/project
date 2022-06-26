@@ -11,10 +11,8 @@ const Routes = () => {
   const { user, setUser } = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
   const [userData, setUserData] = useState(null);
-  console.log("DEBUG::  ~ userData", userData);
 
   const typePT = userData?.typeUser === "PT";
-  console.log("DEBUG::  ~ typePT", typePT);
 
   const onAuthStateChanged = (item) => {
     setUser(item);
