@@ -1,8 +1,6 @@
 import { Container } from "@components/common";
 import Spacer from "@components/common/Spacer";
 import { Label, Title } from "@components/typography";
-import { palette } from "@theme/palette";
-import { DimensionsUtils } from "@utils/dimensions";
 import moment from "moment";
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -12,7 +10,6 @@ import { Card } from "react-native-paper";
 
 const PtCalendarScreen = () => {
   const [items, setItems] = useState({});
-  console.log("DEBUG::  ~ items", items);
 
   const loadItems = (day) => {
     // setTimeout(() => {

@@ -1,6 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import ClientProfileScreen from "@screens/ClientProfileScreen";
+import DietScreen from "@screens/DietScreen";
+import InsertDietScreen from "@screens/InsertDietScreen";
 import MyClientScreen from "@screens/MyClientScreen";
 import PtCalendarScreen from "@screens/PtCalendarScreen";
 import React from "react";
@@ -140,6 +142,20 @@ const ClientStack = () => (
     <Stack.Screen
       name="ClientProfile"
       component={ClientProfileScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+    <Stack.Screen
+      name="Diet"
+      component={DietScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+    <Stack.Screen
+      name="InsertDiet"
+      component={InsertDietScreen}
       options={{
         headerShown: false
       }}

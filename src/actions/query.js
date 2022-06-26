@@ -1,4 +1,4 @@
-import firestore from "@react-native-firebase/firestore";
+import firestore, { firebase } from "@react-native-firebase/firestore";
 
 export const getAllPt = async (cb) => {
   try {
@@ -44,12 +44,30 @@ export const getMyClients = async (user, cb) => {
           const { ptId } = collaboration.data();
           if (ptId === user.uid) {
             list.push({
-              ...collaboration.data()
+              ...collaboration.data(),
+              uid: collaboration.id
             });
           }
         });
       });
+    console.log("QUERY --> getMyClients", list);
+
     cb(list);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getDiet = async (id, day, cb) => {
+  try {
+    await firestore()
+      .collection("collaborations")
+      .doc(id)
+      .get()
+      .then((querySnapshot) => {
+        const { diet } = querySnapshot.data();
+        cb(diet);
+      });
   } catch (e) {
     console.log(e);
   }
@@ -61,6 +79,31 @@ export const choosePT = async (currentUser, ptData) => {
       clientId: currentUser.uid,
       ptId: ptData.uid
     });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const insertInDiet = async (
+  idCollaboration,
+  alimento,
+  quantity,
+  split,
+  day
+) => {
+  try {
+    await firestore()
+      .collection("collaborations")
+      .doc(idCollaboration)
+      .update({
+        diet: firebase.firestore.FieldValue.arrayUnion({
+          split,
+          alimento,
+          quantity,
+          day,
+          id: Date.now()
+        })
+      });
   } catch (e) {
     console.log(e);
   }

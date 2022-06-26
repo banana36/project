@@ -23,7 +23,8 @@ const Subtitle = ({
   lowerCase,
   center,
   right,
-  noLineHeight
+  noLineHeight,
+  onPress
 }) => (
   <>
     {(!!text || !!children) && (
@@ -46,6 +47,7 @@ const Subtitle = ({
           center={center}
           right={right}
           boldColor={boldColor || color}
+          onPress={onPress}
         >
           {text || children}
         </Text>

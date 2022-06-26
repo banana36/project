@@ -3,11 +3,8 @@ import Spacer from "@components/common/Spacer";
 import { Title } from "@components/typography";
 import React from "react";
 
-const ClientProfileScreen = ({ route }) => {
+const ClientProfileScreen = ({ route, navigation }) => {
   const { clientInfo, collaboration } = route.params;
-  console.log("DEBUG::  ~ collaboration", collaboration);
-
-  const onPress = () => {};
 
   return (
     <>
@@ -17,7 +14,10 @@ const ClientProfileScreen = ({ route }) => {
         <Spacer />
         <PrimaryButton title={"Visualizza Info Cliente"} onPress={() => {}} />
         <Spacer />
-        <PrimaryButton title={"Aggiungi Dieta"} onPress={() => {}} />
+        <PrimaryButton
+          title={"Aggiungi Dieta"}
+          onPress={() => navigation.navigate("Diet", { collaboration })}
+        />
         <Spacer />
         <PrimaryButton title={"Aggiungi Allenamento"} onPress={() => {}} />
         <Spacer />

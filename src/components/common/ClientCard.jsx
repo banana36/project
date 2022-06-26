@@ -1,5 +1,6 @@
 import { getClientInfo } from "@actions/query";
 import { Subtitle } from "@components/typography";
+import { useIsFocused } from "@react-navigation/native";
 import { Card, UserImg } from "@styles/FeedStyles";
 import { palette } from "@theme/palette";
 import { DimensionsUtils } from "@utils/dimensions";
@@ -8,11 +9,15 @@ import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ClientCard = ({ item, navigation }) => {
+  const focused = useIsFocused();
+
   const [clientInfo, setClientInfo] = useState(null);
 
   useEffect(() => {
-    getClientInfo(item?.clientId, (data) => setClientInfo(data));
-  }, []);
+    if (focused) {
+      getClientInfo(item?.clientId, (data) => setClientInfo(data));
+    }
+  }, [focused]);
 
   return (
     <TouchableOpacity
