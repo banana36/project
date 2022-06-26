@@ -12,6 +12,8 @@ import ProfileScreen from "../screens/ProfileScreen";
 import AddPostScreen from "../screens/AddPostScreen";
 import MessagesScreen from "../screens/MessagesScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
+import MyClientScreen from "@screens/MyClientScreen";
+import ClientProfileScreen from "@screens/ClientProfileScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -126,16 +128,41 @@ const ProfileStack = ({ navigation }) => (
   </Stack.Navigator>
 );
 
+const ClientStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="MyClient"
+      component={MyClientScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+    <Stack.Screen
+      name="ClientProfile"
+      component={ClientProfileScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+  </Stack.Navigator>
+);
+
+const getActiveRouteName = (route) => {
+  if (route?.state) {
+    return getActiveRouteName(route?.state?.routes?.[route?.state?.index]);
+  }
+  return route?.name;
+};
+
 const PTStack = () => {
   const getTabBarVisibility = (route) => {
-    const routeName = route.state
-      ? route.state.routes[route.state.index].name
-      : "";
+    const routeName = getActiveRouteName(route);
+    console.log("DEBUG::  ~ routeName", routeName);
 
-    if (routeName === "Chat") {
-      return false;
+    if (["Clienti", "MyClient"]?.includes(routeName)) {
+      return true;
     }
-    return true;
+    return false;
   };
 
   return (
@@ -179,13 +206,13 @@ const PTStack = () => {
       /> */}
       <Tab.Screen
         name="Clienti"
-        component={ProfileStack}
-        options={{
-          // tabBarLabel: 'Home',
+        component={ClientStack}
+        options={({ route }) => ({
+          tabBarVisible: getTabBarVisibility(route),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />
           )
-        }}
+        })}
       />
       <Tab.Screen
         name="Calendario"

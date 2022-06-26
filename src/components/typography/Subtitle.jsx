@@ -1,13 +1,12 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { View } from "react-native";
-import PropTypes from "prop-types";
+import { palette } from "../../theme";
 import { Text } from "./index";
 import { textPropTypes } from "./Text";
-import { DimensionsUtils } from "../../utils/dimensions/Dimensions";
-import { palette } from "../../theme";
 
 const Subtitle = ({
-  containerStyle = { paddingTop: DimensionsUtils.getDP(8) },
+  containerStyle = {},
   color = palette.black,
   text,
   regular,

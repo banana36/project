@@ -31,6 +31,30 @@ export const getAllPt = async (cb) => {
   }
 };
 
+export const getMyClients = async (user, cb) => {
+  try {
+    const list = [];
+
+    await firestore()
+      .collection("collaborations")
+      // .orderBy("postTime", "desc")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((collaboration) => {
+          const { ptId } = collaboration.data();
+          if (ptId === user.uid) {
+            list.push({
+              ...collaboration.data()
+            });
+          }
+        });
+      });
+    cb(list);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const choosePT = async (currentUser, ptData) => {
   try {
     await firestore().collection("collaborations").add({
@@ -47,6 +71,22 @@ export const getCurrentUser = async (user, cb) => {
     await firestore()
       .collection("users")
       .doc(user.uid)
+      .get()
+      .then((documentSnapshot) => {
+        if (documentSnapshot.exists) {
+          cb(documentSnapshot.data());
+        }
+      });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getClientInfo = async (id, cb) => {
+  try {
+    await firestore()
+      .collection("users")
+      .doc(id)
       .get()
       .then((documentSnapshot) => {
         if (documentSnapshot.exists) {

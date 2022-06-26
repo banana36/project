@@ -10,6 +10,7 @@ import Header from "./Header";
 import IconWithText from "./IconWithText";
 import PrimaryButton from "./PrimaryButton";
 import PtCard from "./PtCard";
+import ClientCard from "./ClientCard";
 // import Lottie from "./Lottie";
 // import HR from "./HR";
 // import DynamicModal from "./DynamicModal";
@@ -20,6 +21,7 @@ import PtCard from "./PtCard";
 // import PreFilledWithIcon from "./PreFilledWithIcon";
 
 export {
+  ClientCard,
   PtCard,
   FormButton,
   FormInput,

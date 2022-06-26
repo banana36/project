@@ -1,18 +1,12 @@
-import { choosePT, getCurrentUser } from "@actions/query";
+import { choosePT } from "@actions/query";
 import { Page } from "@components/common";
 import Spacer from "@components/common/Spacer";
 import { Title } from "@components/typography";
 import { AuthContext } from "@navigation/AuthProvider.ios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 
 const PtProfileScreen = ({ route }) => {
   const { user } = useContext(AuthContext);
-
-  const [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    getCurrentUser(user, (data) => setCurrentUser(data));
-  }, []);
 
   const { ptData } = route.params;
 
