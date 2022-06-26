@@ -11,7 +11,6 @@ const Routes = () => {
   const { user, setUser } = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
   const [userData, setUserData] = useState(null);
-  console.log("DEBUG::  ~ userData", userData);
 
   const typePT = userData?.typeUser === "PT";
 
@@ -33,16 +32,23 @@ const Routes = () => {
   };
 
   useEffect(() => {
-    getUser();
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
 
+  useEffect(() => {
+    getUser();
+  }, [user]);
+
   if (initializing) return null;
+
+  if (!user) {
+    return <NavigationContainer>{<AuthStack />}</NavigationContainer>;
+  }
 
   return (
     <NavigationContainer>
-      {user ? typePT ? <PTStack /> : <ClientStack /> : <AuthStack />}
+      {typePT ? <PTStack /> : <ClientStack />}
     </NavigationContainer>
   );
 };

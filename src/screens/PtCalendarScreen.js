@@ -65,7 +65,7 @@ const PtCalendarScreen = () => {
 
   const renderItem = (item) => {
     return (
-      <TouchableOpacity style={{ marginRight: 10, marginTop: 35 }}>
+      <TouchableOpacity style={{ marginRight: 10, marginTop: 17 }}>
         <Card>
           <Card.Content>
             <View style={styles.appointmentBox}>
