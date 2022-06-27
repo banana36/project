@@ -1,6 +1,7 @@
 import { getDiet, insertInDiet } from "@actions/query";
 import { Page } from "@components/common";
 import Spacer from "@components/common/Spacer";
+import AddFood from "@components/modalContent/AddFood";
 import { Subtitle, Tiny, Title } from "@components/typography";
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
@@ -21,8 +22,10 @@ const InsertDietScreen = ({ route }) => {
 
   const [diet, setDiet] = useState([]);
 
-  const [alimento, setAlimento] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const [alimento, setAlimento] = useState();
+  console.log("DEBUG::  ~ alimento", alimento);
+  const [quantity, setQuantity] = useState();
+  console.log("DEBUG::  ~ quantity", quantity);
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
@@ -43,39 +46,20 @@ const InsertDietScreen = ({ route }) => {
     getDiet(collaboration?.uid, day, (value) => setDiet(value));
   }, []);
 
-  const insertUpdateMealPlan = (split) => {
-    insertInDiet(collaboration?.uid, alimento, quantity, split, day);
+  const insertUpdateMealPlan = (split, food, gr) => {
+    insertInDiet(collaboration?.uid, food, gr, split, day);
     getDiet(collaboration?.uid, day, (value) => setDiet(value));
     hideModal();
   };
 
   const addFood = (split) => {
     setModalContent(
-      <>
-        <Subtitle text={"Aggiungi Alimento"} />
-        <Spacer small />
-        <TextInput
-          label="Alimento"
-          value={alimento}
-          onChangeText={(text) => setAlimento(text)}
-        />
-        <Spacer small />
-        <TextInput
-          label="Quantità (GR)"
-          value={quantity}
-          onChangeText={(text) => setQuantity(text)}
-        />
-        <Spacer small />
-        <Button
-          icon="plus"
-          mode="contained"
-          onPress={() => {
-            insertUpdateMealPlan(split);
-          }}
-        >
-          Aggiungi
-        </Button>
-      </>
+      <AddFood
+        split={split}
+        onPress={(value, value1, value2) =>
+          insertUpdateMealPlan(value, value1, value2)
+        }
+      />
     );
     showModal();
   };
