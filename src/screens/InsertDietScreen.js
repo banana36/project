@@ -1,4 +1,4 @@
-import { getDiet, insertInDiet } from "@actions/query";
+import { getDiet, insertInDiet, removeFromDiet } from "@actions/query";
 import { Page } from "@components/common";
 import Spacer from "@components/common/Spacer";
 import AddFood from "@components/modalContent/AddFood";
@@ -21,11 +21,6 @@ const InsertDietScreen = ({ route }) => {
   const [modalContent, setModalContent] = useState(null);
 
   const [diet, setDiet] = useState([]);
-
-  const [alimento, setAlimento] = useState();
-  console.log("DEBUG::  ~ alimento", alimento);
-  const [quantity, setQuantity] = useState();
-  console.log("DEBUG::  ~ quantity", quantity);
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
@@ -51,6 +46,10 @@ const InsertDietScreen = ({ route }) => {
     getDiet(collaboration?.uid, day, (value) => setDiet(value));
     hideModal();
   };
+  const removeFoodMealPlan = (item) => {
+    removeFromDiet(collaboration?.uid, item);
+    getDiet(collaboration?.uid, day, (value) => setDiet(value));
+  };
 
   const addFood = (split) => {
     setModalContent(
@@ -68,11 +67,7 @@ const InsertDietScreen = ({ route }) => {
     <>
       <Provider>
         <Portal>
-          <Page
-            hasHeader
-            hasButton
-            buttonProps={{ title: "conferma", onPress: () => {} }}
-          >
+          <Page hasHeader>
             <Spacer />
             <Title text={day} center />
             {daySplit?.map((split) => {
@@ -90,6 +85,11 @@ const InsertDietScreen = ({ route }) => {
                             <Card.Content style={styles.food}>
                               <Tiny text={item?.alimento} />
                               <Tiny text={item?.quantity} />
+                              <Button
+                                icon="close"
+                                mode="outlined"
+                                onPress={() => removeFoodMealPlan(item)}
+                              ></Button>
                             </Card.Content>
                           </Card>
                         </>

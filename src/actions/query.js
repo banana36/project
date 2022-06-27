@@ -109,6 +109,19 @@ export const insertInDiet = async (
   }
 };
 
+export const removeFromDiet = async (idCollaboration, item) => {
+  try {
+    await firestore()
+      .collection("collaborations")
+      .doc(idCollaboration)
+      .update({
+        diet: firebase.firestore.FieldValue.arrayRemove(item)
+      });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const getCurrentUser = async (user, cb) => {
   try {
     await firestore()
