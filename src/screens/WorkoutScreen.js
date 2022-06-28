@@ -1,4 +1,4 @@
-import { Page, PostCard } from "@components/common";
+import { Page } from "@components/common";
 import DietCard from "@components/common/DietCard";
 import Spacer from "@components/common/Spacer";
 import { Subtitle } from "@components/typography";
@@ -6,9 +6,9 @@ import firestore from "@react-native-firebase/firestore";
 import storage from "@react-native-firebase/storage";
 import { DimensionsUtils } from "@utils/dimensions";
 import React, { useEffect, useState } from "react";
-import { Alert, FlatList, StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 
-const HomeScreen = ({ navigation }) => {
+const WorkoutScreen = ({ navigation }) => {
   const [posts, setPosts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [deleted, setDeleted] = useState(false);
@@ -168,7 +168,7 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-export default HomeScreen;
+export default WorkoutScreen;
 
 const styles = StyleSheet.create({
   containerCard: {

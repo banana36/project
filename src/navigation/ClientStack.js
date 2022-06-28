@@ -2,9 +2,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import PtProfileScreen from "@screens/PtProfileScreen";
 import ViewDietScreen from "@screens/ViewDietScreen";
+import WorkoutScreen from "@screens/WorkoutScreen";
 import React from "react";
 import { View } from "react-native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -19,33 +19,13 @@ import SearchPtScreen from "../screens/SearchPtScreen";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const FeedStack = ({ navigation }) => (
+const HomeStack = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="RN Social"
+      name="Home"
       component={HomeScreen}
       options={{
-        headerTitleAlign: "center",
-        headerTitleStyle: {
-          color: "#2e64e5",
-          fontFamily: "Kufam-SemiBoldItalic",
-          fontSize: 18
-        },
-        headerStyle: {
-          shadowColor: "#fff",
-          elevation: 0
-        },
-        headerRight: () => (
-          <View style={{ marginRight: 10 }}>
-            <FontAwesome5.Button
-              name="plus"
-              size={22}
-              backgroundColor="#fff"
-              color="#2e64e5"
-              onPress={() => navigation.navigate("AddPost")}
-            />
-          </View>
-        )
+        headerShown: false
       }}
     />
     <Stack.Screen
@@ -67,29 +47,10 @@ const FeedStack = ({ navigation }) => (
         )
       }}
     />
-    <Stack.Screen
-      name="HomeProfile"
-      component={ProfileScreen}
-      options={{
-        title: "",
-        headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: "#fff",
-          shadowColor: "#fff",
-          elevation: 0
-        },
-        headerBackTitleVisible: false,
-        headerBackImage: () => (
-          <View style={{ marginLeft: 15 }}>
-            <Ionicons name="arrow-back" size={25} color="#2e64e5" />
-          </View>
-        )
-      }}
-    />
   </Stack.Navigator>
 );
 
-const MessageStack = ({ navigation }) => (
+const MessageStack = () => (
   <Stack.Navigator>
     <Stack.Screen name="Messages" component={MessagesScreen} />
     <Stack.Screen
@@ -103,7 +64,7 @@ const MessageStack = ({ navigation }) => (
   </Stack.Navigator>
 );
 
-const ProfileStack = ({ navigation }) => (
+const ProfileStack = () => (
   <Stack.Navigator>
     <Stack.Screen
       name="Profile"
@@ -116,14 +77,7 @@ const ProfileStack = ({ navigation }) => (
       name="EditProfile"
       component={EditProfileScreen}
       options={{
-        headerTitle: "Edit Profile",
-        headerBackTitleVisible: false,
-        headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: "#fff",
-          shadowColor: "#fff",
-          elevation: 0
-        }
+        headerShown: false
       }}
     />
   </Stack.Navigator>
@@ -141,7 +95,7 @@ const DietStack = () => (
   </Stack.Navigator>
 );
 
-const SearchPtStack = ({ navigation }) => (
+const SearchPtStack = () => (
   <Stack.Navigator>
     <Stack.Screen
       name="SearchPT"
@@ -160,6 +114,18 @@ const SearchPtStack = ({ navigation }) => (
   </Stack.Navigator>
 );
 
+const WorkoutStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="Workout"
+      component={WorkoutScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+  </Stack.Navigator>
+);
+
 const getActiveRouteName = (route) => {
   if (route?.state) {
     return getActiveRouteName(route?.state?.routes?.[route?.state?.index]);
@@ -171,7 +137,7 @@ const ClientStack = () => {
   const getTabBarVisibility = (route) => {
     const routeName = getActiveRouteName(route);
 
-    if (routeName === "SearchPT") {
+    if (["SearchPT", "Home", "Dashboard", "Ricerca"].includes(routeName)) {
       return true;
     }
     return false;
@@ -184,11 +150,10 @@ const ClientStack = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={FeedStack}
+        name="Dashboard"
+        component={HomeStack}
         options={({ route }) => ({
-          tabBarLabel: "Home",
-          // tabBarVisible: route.state && route.state.index === 0,
+          tabBarVisible: getTabBarVisibility(route),
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="home-outline"
@@ -198,41 +163,21 @@ const ClientStack = () => {
           )
         })}
       />
-      {/* <Tab.Screen
-        name="Messages"
-        component={MessageStack}
-        options={({ route }) => ({
-          tabBarVisible: getTabBarVisibility(route),
-          // Or Hide tabbar when push!
-          // https://github.com/react-navigation/react-navigation/issues/7677
-          // tabBarVisible: route.state && route.state.index === 0,
-          // tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name="chatbox-ellipses-outline"
-              color={color}
-              size={size}
-            />
-          )
-        })}
-      /> */}
       <Tab.Screen
         name="Dieta"
         component={DietStack}
         options={{
-          // tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" color={color} size={size} />
+            <Ionicons name="fast-food-outline" color={color} size={size} />
           )
         }}
       />
       <Tab.Screen
-        name="Calendario"
-        component={ProfileStack}
+        name="Allenamenti"
+        component={WorkoutStack}
         options={{
-          // tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" color={color} size={size} />
+            <Ionicons name="fitness-outline" color={color} size={size} />
           )
         }}
       />
@@ -241,7 +186,6 @@ const ClientStack = () => {
         component={SearchPtStack}
         options={({ route }) => ({
           tabBarVisible: getTabBarVisibility(route),
-          // tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />
           )
@@ -251,7 +195,6 @@ const ClientStack = () => {
         name="Profile"
         component={ProfileStack}
         options={{
-          // tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />
           )

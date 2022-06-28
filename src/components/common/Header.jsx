@@ -72,7 +72,7 @@ const Header = ({
       style={[
         containerStyle,
         {
-          backgroundColor: backgroundColor || palette.white,
+          backgroundColor: backgroundColor || palette.lightGrey,
           borderBottomColor: borderBottomColor || palette.black,
           paddingHorizontal: paddingHorizontal || DimensionsUtils.getDP(16)
         }

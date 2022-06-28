@@ -2,6 +2,7 @@ import { Platform, StatusBar, Dimensions } from "react-native";
 import DeviceInfo from "react-native-device-info";
 import { isToDownscale } from "@utils/dimensions/libs";
 import { DimensionsUtils } from "@utils/dimensions";
+import { palette } from "./palette";
 
 const hasNotch = DeviceInfo.hasNotch();
 const platform = Platform.OS;
@@ -57,7 +58,7 @@ const defaultPaddingHorizontal = DimensionsUtils.getDP(16);
 
 const navBarHeight = getNavigationBarHeight();
 
-const appBackgroundColor = "#fff";
+const appBackgroundColor = palette.lightGrey;
 
 export const commonStyles = {
   appBackgroundColor,

@@ -53,7 +53,7 @@ const ViewDietScreen = () => {
     <>
       <Provider>
         <Portal>
-          <Page hasHeader headerProps={{}}>
+          <Page>
             <Spacer />
             <Title text={day} center />
             <Label text={"Cambia giorno"} center onPress={changeDay} />

@@ -26,7 +26,7 @@ const Page = ({
   hasHeader,
   color,
   headerProps = {
-    backgroundColor: palette.white,
+    backgroundColor: palette.lightGrey,
     borderBottomColor: palette.black,
     hideLogo: true,
     isWhiteLogo: false,
