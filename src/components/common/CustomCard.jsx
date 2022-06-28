@@ -2,26 +2,26 @@ import { Label } from "@components/typography";
 import { palette } from "@theme/palette";
 import { DimensionsUtils } from "@utils/dimensions";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Touchable, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const DietCard = ({ navigation, style }) => {
+const CustomCard = ({ navigation, style, text, type, onPress }) => {
   return (
-    <View style={[styles.inputContainer, style]}>
+    <TouchableOpacity style={[styles.inputContainer, style]} onPress={onPress}>
       <View style={styles.headerCard}>
-        <Label text={"Dieta"} />
+        <Label text={text} />
         <MaterialCommunityIcons
           name="food-apple-outline"
           color={palette.black}
           size={DimensionsUtils.getIconSize(24)}
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
-export default DietCard;
+export default CustomCard;
 
 const styles = StyleSheet.create({
   inputContainer: {

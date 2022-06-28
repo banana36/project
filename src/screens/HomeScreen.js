@@ -1,5 +1,6 @@
 import { Page, PostCard } from "@components/common";
-import DietCard from "@components/common/DietCard";
+import CustomCard from "@components/common/CustomCard";
+import DietCard from "@components/common/CustomCard";
 import Spacer from "@components/common/Spacer";
 import { Subtitle } from "@components/typography";
 import firestore from "@react-native-firebase/firestore";
@@ -143,22 +144,26 @@ const HomeScreen = ({ navigation }) => {
         <Subtitle text={"Dashboard"} bold />
         <Spacer />
         <View style={styles.containerCard}>
-          <DietCard
+          <CustomCard
+            text={"Dieta"}
             navigation={navigation}
             style={{ marginRight: DimensionsUtils.getDP(8) }}
           />
-          <DietCard
+          <CustomCard
+            text={"Dieta"}
             navigation={navigation}
             style={{ marginLeft: DimensionsUtils.getDP(8) }}
           />
         </View>
         <Spacer />
         <View style={styles.containerCard}>
-          <DietCard
+          <CustomCard
+            text={"Dieta"}
             navigation={navigation}
             style={{ marginRight: DimensionsUtils.getDP(8) }}
           />
-          <DietCard
+          <CustomCard
+            text={"Dieta"}
             navigation={navigation}
             style={{ marginLeft: DimensionsUtils.getDP(8) }}
           />
