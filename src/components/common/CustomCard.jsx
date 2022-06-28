@@ -2,7 +2,7 @@ import { Label } from "@components/typography";
 import { palette } from "@theme/palette";
 import { DimensionsUtils } from "@utils/dimensions";
 import React from "react";
-import { StyleSheet, Touchable, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
