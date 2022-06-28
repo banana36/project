@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import PtProfileScreen from "@screens/PtProfileScreen";
+import ViewDietScreen from "@screens/ViewDietScreen";
 import React from "react";
 import { View } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -128,6 +129,18 @@ const ProfileStack = ({ navigation }) => (
   </Stack.Navigator>
 );
 
+const DietStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="ViewDiet"
+      component={ViewDietScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+  </Stack.Navigator>
+);
+
 const SearchPtStack = ({ navigation }) => (
   <Stack.Navigator>
     <Stack.Screen
@@ -203,6 +216,16 @@ const ClientStack = () => {
           )
         })}
       /> */}
+      <Tab.Screen
+        name="Dieta"
+        component={DietStack}
+        options={{
+          // tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" color={color} size={size} />
+          )
+        }}
+      />
       <Tab.Screen
         name="Calendario"
         component={ProfileStack}

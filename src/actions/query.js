@@ -1,4 +1,5 @@
 import firestore, { firebase } from "@react-native-firebase/firestore";
+import moment from "moment";
 
 export const getAllPt = async (cb) => {
   try {
@@ -75,10 +76,13 @@ export const getDiet = async (id, day, cb) => {
 
 export const choosePT = async (currentUser, ptData) => {
   try {
-    await firestore().collection("collaborations").add({
-      clientId: currentUser.uid,
-      ptId: ptData.uid
-    });
+    await firestore()
+      .collection("collaborations")
+      .add({
+        clientId: currentUser.uid,
+        ptId: ptData.uid,
+        startDate: moment().format("DD-MM-YYYY")
+      });
   } catch (e) {
     console.log(e);
   }
@@ -149,6 +153,33 @@ export const getClientInfo = async (id, cb) => {
           cb(documentSnapshot.data());
         }
       });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getMyCollaborations = async (userId, cb) => {
+  try {
+    const list = [];
+
+    await firestore()
+      .collection("collaborations")
+      .orderBy("startDate", "desc")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((collaboration) => {
+          const { clientId } = collaboration.data();
+          if (clientId === userId) {
+            list.push({
+              ...collaboration.data(),
+              uid: collaboration.id
+            });
+          }
+        });
+      });
+    console.log("QUERY --> getMyCollaborations as Client", list);
+
+    cb(list);
   } catch (e) {
     console.log(e);
   }
