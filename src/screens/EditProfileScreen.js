@@ -16,16 +16,13 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import ImagePicker from "react-native-image-crop-picker";
-import Animated from "react-native-reanimated";
-import BottomSheet from "reanimated-bottom-sheet";
 
 import { FormButton, Page } from "@components/common";
+import Spacer from "@components/common/Spacer";
+import { Title } from "@components/typography";
 import firestore from "@react-native-firebase/firestore";
 import storage from "@react-native-firebase/storage";
 import { AuthContext } from "../navigation/AuthProvider";
-import Spacer from "@components/common/Spacer";
-import { Title } from "@components/typography";
-import { DimensionsUtils } from "@utils/dimensions";
 
 const EditProfileScreen = () => {
   const { user, logout } = useContext(AuthContext);
