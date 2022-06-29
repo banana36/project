@@ -1,83 +1,47 @@
-import React from "react";
-import { View, Text, Button, StyleSheet, FlatList } from "react-native";
+import { getMyChats } from "@actions/query";
+import { AuthContext } from "@navigation/AuthProvider.ios";
+import React, { useContext, useEffect, useState } from "react";
+import { FlatList, StyleSheet } from "react-native";
 import {
-  Container,
   Card,
-  UserInfo,
-  UserImgWrapper,
-  UserImg,
-  UserInfoText,
-  UserName,
-  PostTime,
+  Container,
   MessageText,
-  TextSection
+  PostTime,
+  TextSection,
+  UserImg,
+  UserImgWrapper,
+  UserInfo,
+  UserInfoText,
+  UserName
 } from "../styles/MessageStyles";
 
-const Messages = [
-  {
-    id: "1",
-    userName: "Jenny Doe",
-    userImg: require("../assets/users/user-3.jpg"),
-    messageTime: "4 mins ago",
-    messageText:
-      "Hey there, this is my test for a post of my social app in React Native."
-  },
-  {
-    id: "2",
-    userName: "John Doe",
-    userImg: require("../assets/users/user-1.jpg"),
-    messageTime: "2 hours ago",
-    messageText:
-      "Hey there, this is my test for a post of my social app in React Native."
-  },
-  {
-    id: "3",
-    userName: "Ken William",
-    userImg: require("../assets/users/user-4.jpg"),
-    messageTime: "1 hours ago",
-    messageText:
-      "Hey there, this is my test for a post of my social app in React Native."
-  },
-  {
-    id: "4",
-    userName: "Selina Paul",
-    userImg: require("../assets/users/user-6.jpg"),
-    messageTime: "1 day ago",
-    messageText:
-      "Hey there, this is my test for a post of my social app in React Native."
-  },
-  {
-    id: "5",
-    userName: "Christy Alex",
-    userImg: require("../assets/users/user-7.jpg"),
-    messageTime: "2 days ago",
-    messageText:
-      "Hey there, this is my test for a post of my social app in React Native."
-  }
-];
-
 const MessagesScreen = ({ navigation }) => {
+  const { user } = useContext(AuthContext);
+  const [chats, setChats] = useState({});
+
+  useEffect(() => {
+    getMyChats(user, (data) => setChats(data));
+  }, []);
+
   return (
     <Container>
       <FlatList
-        data={Messages}
+        data={chats}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Card
-            onPress={() =>
-              navigation.navigate("Chat", { userName: item.userName })
-            }
+            onPress={() => navigation.navigate("Chat", { chatID: item?.uid })}
           >
             <UserInfo>
               <UserImgWrapper>
-                <UserImg source={item.userImg} />
+                <UserImg source={item?.userImg} />
               </UserImgWrapper>
               <TextSection>
                 <UserInfoText>
-                  <UserName>{item.userName}</UserName>
-                  <PostTime>{item.messageTime}</PostTime>
+                  <UserName>{item?.ptName}</UserName>
+                  <PostTime>{item?.startDate}</PostTime>
                 </UserInfoText>
-                <MessageText>{item.messageText}</MessageText>
+                <MessageText>{item?.lastMessage}</MessageText>
               </TextSection>
             </UserInfo>
           </Card>

@@ -20,71 +20,21 @@ import ProfileScreen from "../screens/ProfileScreen";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const FeedStack = ({ navigation }) => (
+const FeedStack = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="RN Social"
+      name="Home"
       component={HomeScreen}
       options={{
-        headerTitleAlign: "center",
-        headerTitleStyle: {
-          color: "#2e64e5",
-          fontFamily: "Kufam-SemiBoldItalic",
-          fontSize: 18
-        },
-        headerStyle: {
-          shadowColor: "#fff",
-          elevation: 0
-        },
-        headerRight: () => (
-          <View style={{ marginRight: 10 }}>
-            <FontAwesome5.Button
-              name="plus"
-              size={22}
-              backgroundColor="#fff"
-              color="#2e64e5"
-              onPress={() => navigation.navigate("AddPost")}
-            />
-          </View>
-        )
+        headerShown: false
       }}
     />
+    <Stack.Screen name="Messages" component={MessagesScreen} />
     <Stack.Screen
-      name="AddPost"
-      component={AddPostScreen}
+      name="Chat"
+      component={ChatScreen}
       options={{
-        title: "",
-        headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: "#2e64e515",
-          shadowColor: "#2e64e515",
-          elevation: 0
-        },
-        headerBackTitleVisible: false,
-        headerBackImage: () => (
-          <View style={{ marginLeft: 15 }}>
-            <Ionicons name="arrow-back" size={25} color="#2e64e5" />
-          </View>
-        )
-      }}
-    />
-    <Stack.Screen
-      name="HomeProfile"
-      component={ProfileScreen}
-      options={{
-        title: "",
-        headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: "#fff",
-          shadowColor: "#fff",
-          elevation: 0
-        },
-        headerBackTitleVisible: false,
-        headerBackImage: () => (
-          <View style={{ marginLeft: 15 }}>
-            <Ionicons name="arrow-back" size={25} color="#2e64e5" />
-          </View>
-        )
+        headerShown: false
       }}
     />
   </Stack.Navigator>
@@ -187,7 +137,7 @@ const PTStack = () => {
     const routeName = getActiveRouteName(route);
     console.log("DEBUG::  ~ routeName", routeName);
 
-    if (["Clienti", "MyClient"]?.includes(routeName)) {
+    if (["Clienti", "MyClient", "Dashboard", "Home"]?.includes(routeName)) {
       return true;
     }
     return false;
@@ -200,11 +150,10 @@ const PTStack = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="Dashboard"
         component={FeedStack}
         options={({ route }) => ({
-          tabBarLabel: "Home",
-          // tabBarVisible: route.state && route.state.index === 0,
+          tabBarVisible: getTabBarVisibility(route),
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="home-outline"

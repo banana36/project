@@ -1,4 +1,4 @@
-import { choosePT } from "@actions/query";
+import { choosePT, creatChat } from "@actions/query";
 import { Page } from "@components/common";
 import Spacer from "@components/common/Spacer";
 import { Title } from "@components/typography";
@@ -10,7 +10,10 @@ const PtProfileScreen = ({ route }) => {
 
   const { ptData } = route.params;
 
-  const onPress = () => choosePT(user, ptData);
+  const onPress = () => {
+    creatChat(user, ptData);
+    choosePT(user, ptData);
+  };
 
   return (
     <>

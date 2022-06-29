@@ -89,7 +89,7 @@ const Page = ({
 
   const getHeaderOnPressHelp = () => {
     if (headerProps?.onPressHelp) return headerProps?.onPressHelp;
-    if (!headerProps?.hideSupport) return () => NavigationHelper.goToSupport();
+    if (!headerProps?.hideSupport) return () => navigation.navigate("Messages");
     return undefined;
   };
 

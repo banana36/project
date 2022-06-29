@@ -1,13 +1,12 @@
-import { Page, PostCard } from "@components/common";
+import { Page } from "@components/common";
 import CustomCard from "@components/common/CustomCard";
-import DietCard from "@components/common/CustomCard";
 import Spacer from "@components/common/Spacer";
 import { Subtitle } from "@components/typography";
 import firestore from "@react-native-firebase/firestore";
 import storage from "@react-native-firebase/storage";
 import { DimensionsUtils } from "@utils/dimensions";
 import React, { useEffect, useState } from "react";
-import { Alert, FlatList, StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 
 const HomeScreen = ({ navigation }) => {
   const [posts, setPosts] = useState(null);
@@ -26,14 +25,8 @@ const HomeScreen = ({ navigation }) => {
           // console.log('Total Posts: ', querySnapshot.size);
 
           querySnapshot.forEach((doc) => {
-            const {
-              userId,
-              post,
-              postImg,
-              postTime,
-              likes,
-              comments
-            } = doc.data();
+            const { userId, post, postImg, postTime, likes, comments } =
+              doc.data();
             list.push({
               id: doc.id,
               userId,
@@ -138,7 +131,7 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <Page>
+    <Page hasHeader headerProps={{ hideGoBack: true }}>
       <View>
         <Spacer />
         <Subtitle text={"Dashboard"} bold />
@@ -148,6 +141,7 @@ const HomeScreen = ({ navigation }) => {
             text={"Dieta"}
             navigation={navigation}
             style={{ marginRight: DimensionsUtils.getDP(8) }}
+            onPress={() => navigation.navigate("Messages")}
           />
           <CustomCard
             text={"Dieta"}

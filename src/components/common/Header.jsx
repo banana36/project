@@ -4,6 +4,8 @@ import { DimensionsUtils } from "@utils/dimensions";
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import IconWithText from "./IconWithText";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const Header = ({
   backgroundColor,
@@ -81,11 +83,13 @@ const Header = ({
       <>{getLeftSection()}</>
       <View style={styles.contentContainer}>
         {!!onPressHelp && typeof onPressHelp === "function" && (
-          <IconWithText
-            iconName={"support_outline"}
-            onPress={onPressHelp}
-            iconColor={helpIconColor || palette.black}
-          />
+          <TouchableWithoutFeedback onPress={onPressHelp}>
+            <MaterialCommunityIcons
+              name="snapchat"
+              color={helpIconColor || palette.black}
+              size={DimensionsUtils.getIconSize(30)}
+            />
+          </TouchableWithoutFeedback>
         )}
         {!!onPressClose && typeof onPressClose === "function" && (
           <IconWithText

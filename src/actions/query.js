@@ -74,6 +74,26 @@ export const getDiet = async (id, day, cb) => {
   }
 };
 
+export const creatChat = async (currentUser, ptData) => {
+  try {
+    await firestore()
+      .collection("chats")
+      .add({
+        clientId: currentUser.uid,
+        ptId: ptData.uid,
+        startDate: moment().format("DD-MM-YYYY"),
+        messages: null,
+        lastMessage: null,
+        ptName: `${ptData.fname} ${ptData.lname}`,
+        clientName: "jack",
+        chatID: Date.now(),
+        lastMessageTimestamp: null
+      });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const choosePT = async (currentUser, ptData) => {
   try {
     await firestore()
@@ -82,6 +102,46 @@ export const choosePT = async (currentUser, ptData) => {
         clientId: currentUser.uid,
         ptId: ptData.uid,
         startDate: moment().format("DD-MM-YYYY")
+      });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const sendMessage = async (chatID, message, _id, userID) => {
+  try {
+    await firestore()
+      .collection("chats")
+      .doc(chatID)
+      .update({
+        messages: firebase.firestore.FieldValue.arrayUnion({
+          user: {
+            _id: userID,
+            name: "React Native",
+            avatar: "https://placeimg.com/140/140/any"
+          },
+          _id,
+          text: message,
+          createdAt: moment().format()
+        })
+      });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getChatMessages = async (chatID, cb) => {
+  try {
+    await firestore()
+      .collection("chats")
+      .doc(chatID)
+      .get()
+      .then((querySnapshot) => {
+        const { messages } = querySnapshot.data();
+        const messagesSorted = messages.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        cb(messagesSorted);
       });
   } catch (e) {
     console.log(e);
@@ -153,6 +213,33 @@ export const getClientInfo = async (id, cb) => {
           cb(documentSnapshot.data());
         }
       });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getMyChats = async (user, cb) => {
+  console.log("DEBUG::  ~ user", user);
+  try {
+    const list = [];
+
+    await firestore()
+      .collection("chats")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((chat) => {
+          const { ptId, clientId } = chat.data();
+          if (ptId === user.uid || clientId === user.uid) {
+            list.push({
+              ...chat.data(),
+              uid: chat.id
+            });
+          }
+        });
+      });
+    console.log("QUERY --> getMyChats", list);
+
+    cb(list);
   } catch (e) {
     console.log(e);
   }
