@@ -1,5 +1,6 @@
 import { getMyChats } from "@actions/query";
 import { AuthContext } from "@navigation/AuthProvider.ios";
+import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import {
@@ -39,7 +40,9 @@ const MessagesScreen = ({ navigation }) => {
               <TextSection>
                 <UserInfoText>
                   <UserName>{item?.ptName}</UserName>
-                  <PostTime>{item?.startDate}</PostTime>
+                  <PostTime>
+                    {moment(item?.lastMessageTimestamp).format("hh:mm dddd")}
+                  </PostTime>
                 </UserInfoText>
                 <MessageText>{item?.lastMessage}</MessageText>
               </TextSection>

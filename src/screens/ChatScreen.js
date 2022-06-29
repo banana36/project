@@ -58,9 +58,6 @@ const ChatScreen = ({ route }) => {
   const renderBubble = (props) => {
     const messageSenderId = props?.currentMessage?.user?._id;
 
-    console.log("DEBUG::  ~ messageSenderId", props?.currentMessage?.user);
-    console.log("DEBUG::  ~ user?.uid", user?.uid);
-
     return (
       <Bubble
         {...props}

@@ -114,6 +114,8 @@ export const sendMessage = async (chatID, message, _id, userID) => {
       .collection("chats")
       .doc(chatID)
       .update({
+        lastMessage: message,
+        lastMessageTimestamp: moment().format(),
         messages: firebase.firestore.FieldValue.arrayUnion({
           user: {
             _id: userID,
