@@ -74,7 +74,7 @@ export const getDiet = async (id, day, cb) => {
   }
 };
 
-export const creatChat = async (currentUser, ptData) => {
+export const createChat = async (currentUser, ptData) => {
   try {
     await firestore()
       .collection("chats")
