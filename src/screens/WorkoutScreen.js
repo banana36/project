@@ -1,50 +1,39 @@
-import { Page } from "@components/common";
+import { Page, PrimaryButton } from "@components/common";
 import Spacer from "@components/common/Spacer";
-import WorkoutCard from "@components/common/WorkoutCard";
 import { Title } from "@components/typography";
 import { DimensionsUtils } from "@utils/dimensions";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
-const WorkoutScreen = ({ navigation }) => {
+const WorkoutScreen = ({ navigation, route }) => {
+  const { collaboration } = route.params;
+  console.log("DEBUG::  ~ collaboration", collaboration);
+
+  // const { ptData } = route.params;
+
+  const onPress = () => {
+    navigation.navigate("InsertWorkout", { collaboration });
+  };
+
   return (
-    <Page>
-      <View>
+    <>
+      <Page hasHeader>
         <Spacer />
-        <Title text={"Seleziona il tuo allenamento"} bold />
-        <Spacer />
-        <View style={styles.containerCard}>
-          <WorkoutCard
-            navigation={navigation}
-            style={{ marginRight: DimensionsUtils.getDP(8) }}
-          />
-          <WorkoutCard
-            navigation={navigation}
-            style={{ marginLeft: DimensionsUtils.getDP(8) }}
-          />
-        </View>
-        <Spacer />
-        <View style={styles.containerCard}>
-          <WorkoutCard
-            navigation={navigation}
-            style={{ marginRight: DimensionsUtils.getDP(8) }}
-          />
-          <WorkoutCard
-            navigation={navigation}
-            style={{ marginLeft: DimensionsUtils.getDP(8) }}
-          />
-        </View>
-      </View>
-    </Page>
+        <Title text={"Schede"} center />
+
+        <Spacer small />
+        <PrimaryButton title={"Aggiungi"} onPress={() => onPress()} />
+      </Page>
+    </>
   );
 };
 
 export default WorkoutScreen;
 
 const styles = StyleSheet.create({
-  containerCard: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between"
+  surface: {
+    paddingVertical: DimensionsUtils.getDP(20),
+    alignItems: "center",
+    justifyContent: "center"
   }
 });

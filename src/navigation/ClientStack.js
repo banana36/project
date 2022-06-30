@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import PtProfileScreen from "@screens/PtProfileScreen";
 import ViewDietScreen from "@screens/ViewDietScreen";
-import WorkoutScreen from "@screens/WorkoutScreen";
+import ViewWorkoutScreen from "@screens/ViewWorkoutScreen";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -90,8 +90,8 @@ const SearchPtStack = () => (
 const WorkoutStack = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="Workout"
-      component={WorkoutScreen}
+      name="ViewWorkout"
+      component={ViewWorkoutScreen}
       options={{
         headerShown: false
       }}

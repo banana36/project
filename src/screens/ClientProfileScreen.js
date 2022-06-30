@@ -18,8 +18,7 @@ const ClientProfileScreen = ({ route, navigation }) => {
           <Title text={`${clientInfo.fname} ${clientInfo.lname}`} />
           <UserImg
             source={{
-              uri:
-                "https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg"
+              uri: "https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg"
             }}
           />
         </View>
@@ -44,6 +43,7 @@ const ClientProfileScreen = ({ route, navigation }) => {
             text={"Workout Plan"}
             navigation={navigation}
             style={{ marginRight: DimensionsUtils.getDP(8) }}
+            onPress={() => navigation.navigate("Workout", { collaboration })}
           />
           <CustomCard
             text={"Integrazione"}

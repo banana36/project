@@ -273,3 +273,20 @@ export const getMyCollaborations = async (userId, cb) => {
     console.log(e);
   }
 };
+
+export const insertWorkout = async (idCollaboration, workout, day) => {
+  try {
+    await firestore()
+      .collection("collaborations")
+      .doc(idCollaboration)
+      .update({
+        workout: firebase.firestore.FieldValue.arrayUnion({
+          workout,
+          day,
+          id: Date.now()
+        })
+      });
+  } catch (e) {
+    console.log(e);
+  }
+};

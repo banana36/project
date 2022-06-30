@@ -3,14 +3,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ClientProfileScreen from "@screens/ClientProfileScreen";
 import DietScreen from "@screens/DietScreen";
 import InsertDietScreen from "@screens/InsertDietScreen";
+import InsertWorkoutScreen from "@screens/InsertWorkoutScreen";
 import MyClientScreen from "@screens/MyClientScreen";
 import PtCalendarScreen from "@screens/PtCalendarScreen";
+import WorkoutScreen from "@screens/WorkoutScreen";
 import React from "react";
-import { View } from "react-native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import AddPostScreen from "../screens/AddPostScreen";
 import ChatScreen from "../screens/ChatScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
 import HomeScreen from "../screens/HomeScreen";
@@ -106,6 +105,20 @@ const ClientStack = () => (
     <Stack.Screen
       name="InsertDiet"
       component={InsertDietScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+    <Stack.Screen
+      name="Workout"
+      component={WorkoutScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+    <Stack.Screen
+      name="InsertWorkout"
+      component={InsertWorkoutScreen}
       options={{
         headerShown: false
       }}
