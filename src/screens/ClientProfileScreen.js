@@ -8,7 +8,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 
 const ClientProfileScreen = ({ route, navigation }) => {
-  const { clientInfo, collaboration } = route.params;
+  const { clientInfo, collaborationID } = route.params;
 
   return (
     <>
@@ -34,7 +34,7 @@ const ClientProfileScreen = ({ route, navigation }) => {
             text={"Diet Plan"}
             navigation={navigation}
             style={{ marginLeft: DimensionsUtils.getDP(8) }}
-            onPress={() => navigation.navigate("Diet", { collaboration })}
+            onPress={() => navigation.navigate("Diet", { collaborationID })}
           />
         </View>
         <Spacer />
@@ -43,7 +43,7 @@ const ClientProfileScreen = ({ route, navigation }) => {
             text={"Workout Plan"}
             navigation={navigation}
             style={{ marginRight: DimensionsUtils.getDP(8) }}
-            onPress={() => navigation.navigate("Workout", { collaboration })}
+            onPress={() => navigation.navigate("Workout", { collaborationID })}
           />
           <CustomCard
             text={"Integrazione"}

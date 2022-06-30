@@ -5,17 +5,11 @@ import AddFood from "@components/modalContent/AddFood";
 import { Subtitle, Tiny, Title } from "@components/typography";
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import {
-  Button,
-  Card,
-  Modal,
-  Portal,
-  Provider,
-  TextInput
-} from "react-native-paper";
+import { Button, Card, Modal, Portal, Provider } from "react-native-paper";
 
 const InsertDietScreen = ({ route }) => {
-  const { collaboration } = route.params;
+  const { collaborationID } = route.params;
+  console.log("DEBUG::  ~ collaborationID", collaborationID);
 
   const [visible, setVisible] = useState(false);
   const [modalContent, setModalContent] = useState(null);
@@ -38,17 +32,17 @@ const InsertDietScreen = ({ route }) => {
   ];
 
   useEffect(() => {
-    getDiet(collaboration?.uid, day, (value) => setDiet(value));
+    getDiet(collaborationID, (value) => setDiet(value));
   }, []);
 
   const insertUpdateMealPlan = (split, food, gr) => {
-    insertInDiet(collaboration?.uid, food, gr, split, day);
-    getDiet(collaboration?.uid, day, (value) => setDiet(value));
+    insertInDiet(collaborationID, food, gr, split, day);
+    getDiet(collaborationID, (value) => setDiet(value));
     hideModal();
   };
   const removeFoodMealPlan = (item) => {
-    removeFromDiet(collaboration?.uid, item);
-    getDiet(collaboration?.uid, day, (value) => setDiet(value));
+    removeFromDiet(collaborationID, item);
+    getDiet(collaborationID, (value) => setDiet(value));
   };
 
   const addFood = (split) => {

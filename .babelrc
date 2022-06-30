@@ -10,7 +10,10 @@
           "@navigation": "./src/navigation",
           "@styles": "./src/styles",
           "@core": "./src/core",
-          "@actions": "./src/actions"
+          "@actions": "./src/actions",
+          "@store": "./src/store",
+          "@reducers": "./src/reducers",
+          "@constants": "./src/constants"
         }
       }]
     ]

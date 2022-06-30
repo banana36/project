@@ -1,4 +1,4 @@
-import { insertWorkout } from "@actions/query";
+import { insertWorkout, modifyWorkout } from "@actions/query";
 import { Page } from "@components/common";
 import Spacer from "@components/common/Spacer";
 import AddExercise from "@components/modalContent/AddExercise";
@@ -19,15 +19,16 @@ import {
   TextInput
 } from "react-native-paper";
 
-const InsertWorkoutScreen = ({ navigation, route }) => {
-  const { collaborationID } = route.params;
+const ModifyWorkoutScreen = ({ navigation, route }) => {
+  const { collaborationID, workoutInfo, workoutList } = route.params;
+  console.log("DEBUG::  ~ workoutList", workoutList);
 
   const [visible, setVisible] = useState(false);
   const [modalContent, setModalContent] = useState(null);
 
   const [nameWorkout, setNameWorkout] = useState("Scheda");
-  const [dayWorkout, setDayWorkout] = useState("");
-  const [workout, setWorkout] = useState([]);
+  const [dayWorkout, setDayWorkout] = useState(workoutInfo.day);
+  const [workout, setWorkout] = useState(workoutInfo?.workout);
   console.log("DEBUG::  ~ workout", workout);
 
   const showModal = () => setVisible(true);
@@ -38,9 +39,20 @@ const InsertWorkoutScreen = ({ navigation, route }) => {
   //   getDiet(collaboration?.uid, day, (value) => setDiet(value));
   // }, []);
 
-  const insertWorkoutInPlan = () => {
-    insertWorkout(collaborationID, workout, dayWorkout);
+  const modifyWorkoutInPlan = () => {
+    const workoutFiltered = workoutList?.filter(
+      (item) => item.id !== workoutInfo?.id
+    );
+    const workoutChanged = workoutList?.find(
+      (item) => item.id === workoutInfo?.id
+    );
+    workoutChanged.day = dayWorkout;
+    workoutChanged.workout = workout;
+    const workoutReplacement = [...workoutFiltered];
+    workoutReplacement?.push({ ...workoutChanged });
+    modifyWorkout(collaborationID, workoutReplacement);
   };
+
   // const removeFoodMealPlan = (item) => {
   //   removeFromDiet(collaboration?.uid, item);
   //   getDiet(collaboration?.uid, day, (value) => setDiet(value));
@@ -107,7 +119,7 @@ const InsertWorkoutScreen = ({ navigation, route }) => {
             buttonProps={{
               title: "Salva",
               onPress: () => {
-                insertWorkoutInPlan();
+                modifyWorkoutInPlan();
                 navigation.pop();
               }
             }}
@@ -188,7 +200,7 @@ const InsertWorkoutScreen = ({ navigation, route }) => {
   );
 };
 
-export default InsertWorkoutScreen;
+export default ModifyWorkoutScreen;
 
 const styles = StyleSheet.create({
   food: {

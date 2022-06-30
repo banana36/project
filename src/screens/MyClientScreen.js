@@ -7,19 +7,19 @@ import { useIsFocused } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 import { Searchbar } from "react-native-paper";
+import { useSelector } from "react-redux";
 
 const MyClientScreen = ({ navigation }) => {
   const focused = useIsFocused();
   const { user } = useContext(AuthContext);
 
-  const [listMyClients, setListMyClients] = useState(null);
+  const { collaborations } = useSelector((state) => state.collaboration);
+
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (focused) {
-      getMyClients(user, (result) => {
-        setListMyClients(result);
-      });
+      getMyClients(user);
     }
   }, [focused]);
 
@@ -37,7 +37,7 @@ const MyClientScreen = ({ navigation }) => {
         />
         <Spacer />
         <FlatList
-          data={listMyClients}
+          data={collaborations}
           renderItem={({ item }) => (
             <ClientCard item={item} navigation={navigation} />
           )}

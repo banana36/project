@@ -24,15 +24,14 @@ const ClientCard = ({ item, navigation }) => {
       onPress={() => {
         navigation.navigate("ClientProfile", {
           clientInfo,
-          collaboration: item
+          collaborationID: item?.uid
         });
       }}
     >
       <Card key={item.id} style={styles.imgTextBox}>
         <UserImg
           source={{
-            uri:
-              "https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg"
+            uri: "https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg"
           }}
         />
         <Subtitle

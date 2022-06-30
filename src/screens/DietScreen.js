@@ -6,7 +6,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 const DietScreen = ({ navigation, route }) => {
-  const { collaboration } = route.params;
+  const { collaborationID } = route.params;
 
   const days = [
     "Lunedi",
@@ -21,7 +21,7 @@ const DietScreen = ({ navigation, route }) => {
   // const { ptData } = route.params;
 
   const onPress = (day) => {
-    navigation.navigate("InsertDiet", { day, collaboration });
+    navigation.navigate("InsertDiet", { day, collaborationID });
   };
 
   return (

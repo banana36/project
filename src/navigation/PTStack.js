@@ -4,6 +4,7 @@ import ClientProfileScreen from "@screens/ClientProfileScreen";
 import DietScreen from "@screens/DietScreen";
 import InsertDietScreen from "@screens/InsertDietScreen";
 import InsertWorkoutScreen from "@screens/InsertWorkoutScreen";
+import ModifyWorkoutScreen from "@screens/ModifyWorkoutScreen";
 import MyClientScreen from "@screens/MyClientScreen";
 import PtCalendarScreen from "@screens/PtCalendarScreen";
 import WorkoutScreen from "@screens/WorkoutScreen";
@@ -119,6 +120,13 @@ const ClientStack = () => (
     <Stack.Screen
       name="InsertWorkout"
       component={InsertWorkoutScreen}
+      options={{
+        headerShown: false
+      }}
+    />
+    <Stack.Screen
+      name="ModifyWorkout"
+      component={ModifyWorkoutScreen}
       options={{
         headerShown: false
       }}

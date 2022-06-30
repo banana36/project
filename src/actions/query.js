@@ -1,5 +1,7 @@
+import { GET_COLLABORATION } from "@constants/";
 import firestore, { firebase } from "@react-native-firebase/firestore";
 import moment from "moment";
+import { store } from "../../App";
 
 export const getAllPt = async (cb) => {
   try {
@@ -32,7 +34,7 @@ export const getAllPt = async (cb) => {
   }
 };
 
-export const getMyClients = async (user, cb) => {
+export const getMyClients = async (user) => {
   try {
     const list = [];
 
@@ -49,17 +51,19 @@ export const getMyClients = async (user, cb) => {
               uid: collaboration.id
             });
           }
+          console.log("QUERY --> getMyClients", list);
+          store.dispatch({
+            type: GET_COLLABORATION,
+            payload: list
+          });
         });
       });
-    console.log("QUERY --> getMyClients", list);
-
-    cb(list);
   } catch (e) {
     console.log(e);
   }
 };
 
-export const getDiet = async (id, day, cb) => {
+export const getDiet = async (id, cb) => {
   try {
     await firestore()
       .collection("collaborations")
@@ -68,6 +72,21 @@ export const getDiet = async (id, day, cb) => {
       .then((querySnapshot) => {
         const { diet } = querySnapshot.data();
         cb(diet);
+      });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getWorkout = async (id, cb) => {
+  try {
+    await firestore()
+      .collection("collaborations")
+      .doc(id)
+      .get()
+      .then((querySnapshot) => {
+        const { workout } = querySnapshot.data();
+        cb(workout);
       });
   } catch (e) {
     console.log(e);
@@ -286,6 +305,16 @@ export const insertWorkout = async (idCollaboration, workout, day) => {
           id: Date.now()
         })
       });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const modifyWorkout = async (idCollaboration, workout) => {
+  try {
+    await firestore().collection("collaborations").doc(idCollaboration).update({
+      workout
+    });
   } catch (e) {
     console.log(e);
   }

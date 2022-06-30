@@ -30,6 +30,15 @@
         "@actions/*": [
           "./actions/*"
         ],
+        "@reducers/*": [
+          "./reducers/*"
+        ],
+        "@store/*": [
+          "./store/*"
+        ],
+        "@constants/*": [
+          "./constants/*"
+        ],
       }
     },
     "exclude": [
