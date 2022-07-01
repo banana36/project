@@ -31,9 +31,8 @@ const WorkoutScreen = ({ navigation, route }) => {
     <>
       <Page hasHeader>
         <Spacer />
-        <Title text={"Schede"} center />
+        <Title text={"Allenamenti"} center />
         {workoutList?.map((item) => {
-
           return (
             <>
               <Spacer micro />
