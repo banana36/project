@@ -15,7 +15,7 @@ const ClientProfileScreen = ({ route, navigation }) => {
       <Page hasHeader>
         <Spacer />
         <View style={styles.header}>
-          <Title text={`${clientInfo.fname} ${clientInfo.lname}`} />
+          <Title text={`${clientInfo?.fname} ${clientInfo?.lname}`} />
           <UserImg
             source={{
               uri: "https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg"
