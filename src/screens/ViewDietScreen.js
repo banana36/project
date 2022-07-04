@@ -1,18 +1,16 @@
-import { getMyCollaborations } from "@actions/query";
 import { Page } from "@components/common";
 import Spacer from "@components/common/Spacer";
 import ChangeDay from "@components/modalContent/ChangeDay";
 import { Label, Subtitle, Tiny, Title } from "@components/typography";
-import { AuthContext } from "@navigation/AuthProvider.ios";
 import moment from "moment";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Card, Modal, Portal, Provider } from "react-native-paper";
+import { useSelector } from "react-redux";
 
 const ViewDietScreen = () => {
-  const { user } = useContext(AuthContext);
+  const { myCollaboration } = useSelector((state) => state.ClientReducer);
 
-  const [collaboration, setCollaboration] = useState({});
   const [day, setDay] = useState(moment().format("dddd"));
 
   const [visible, setVisible] = useState(false);
@@ -21,7 +19,7 @@ const ViewDietScreen = () => {
   const hideModal = () => setVisible(false);
   const containerStyle = { backgroundColor: "white", padding: 20 };
 
-  const diet = collaboration?.[0]?.diet;
+  const diet = myCollaboration?.[0]?.diet;
   console.log("DEBUG::  ~ diet", diet);
 
   const daySplit = [
@@ -32,10 +30,6 @@ const ViewDietScreen = () => {
     "Post-workout",
     "Cena"
   ];
-
-  useEffect(() => {
-    getMyCollaborations(user.uid, (value) => setCollaboration(value));
-  }, []);
 
   const changeDay = () => {
     setModalContent(
@@ -64,7 +58,7 @@ const ViewDietScreen = () => {
                 {diet?.map(
                   (item) =>
                     item?.split === split &&
-                    item?.day?.toLowerCase() === day && (
+                    item?.day?.toLowerCase() === day?.toLowerCase() && (
                       <>
                         <Spacer micro />
                         <Card mode="outlined">

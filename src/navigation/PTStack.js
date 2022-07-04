@@ -7,14 +7,13 @@ import InsertWorkoutScreen from "@screens/InsertWorkoutScreen";
 import ModifyWorkoutScreen from "@screens/ModifyWorkoutScreen";
 import MyClientScreen from "@screens/MyClientScreen";
 import PtCalendarScreen from "@screens/PtCalendarScreen";
+import PTHomeScreen from "@screens/PTHomeScreen";
 import WorkoutScreen from "@screens/WorkoutScreen";
-import { nominalTypeHack } from "prop-types";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ChatScreen from "../screens/ChatScreen";
 import EditProfileScreen from "../screens/EditProfileScreen";
-import HomeScreen from "../screens/HomeScreen";
 import MessagesScreen from "../screens/MessagesScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 
@@ -25,7 +24,7 @@ const FeedStack = () => (
   <Stack.Navigator>
     <Stack.Screen
       name="Home"
-      component={HomeScreen}
+      component={PTHomeScreen}
       options={{
         headerShown: false
       }}

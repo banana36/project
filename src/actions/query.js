@@ -1,4 +1,4 @@
-import { GET_MY_CLIENTS } from "@constants/";
+import { GET_MY_CLIENTS, GET_MY_COLLABORATION } from "@constants/";
 import firestore, { firebase } from "@react-native-firebase/firestore";
 import moment from "moment";
 import { store } from "../../App";
@@ -266,7 +266,7 @@ export const getMyChats = async (user, cb) => {
   }
 };
 
-export const getMyCollaborations = async (userId, cb) => {
+export const getMyCollaborations = async (userId) => {
   try {
     const list = [];
 
@@ -285,10 +285,12 @@ export const getMyCollaborations = async (userId, cb) => {
             });
           }
         });
+        store.dispatch({
+          type: GET_MY_COLLABORATION,
+          payload: list
+        });
       });
     console.log("QUERY --> getMyCollaborations as Client", list);
-
-    cb(list);
   } catch (e) {
     console.log(e);
   }
