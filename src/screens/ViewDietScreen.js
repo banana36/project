@@ -57,30 +57,27 @@ const ViewDietScreen = () => {
             <Spacer />
             <Title text={day} center />
             <Label text={"Cambia giorno"} center onPress={changeDay} />
-            {daySplit?.map((split) => {
-              return (
-                <>
-                  <Spacer small />
-                  <Subtitle text={split} />
-                  {diet?.map((item) => {
-                    return (
-                      item?.split === split &&
-                      item?.day?.toLowerCase() === day && (
-                        <>
-                          <Spacer micro />
-                          <Card mode="outlined">
-                            <Card.Content style={styles.food}>
-                              <Tiny text={item?.alimento} />
-                              <Tiny text={item?.quantity} />
-                            </Card.Content>
-                          </Card>
-                        </>
-                      )
-                    );
-                  })}
-                </>
-              );
-            })}
+            {daySplit?.map((split) => (
+              <>
+                <Spacer small />
+                <Subtitle text={split} />
+                {diet?.map(
+                  (item) =>
+                    item?.split === split &&
+                    item?.day?.toLowerCase() === day && (
+                      <>
+                        <Spacer micro />
+                        <Card mode="outlined">
+                          <Card.Content style={styles.food}>
+                            <Tiny text={item?.alimento} />
+                            <Tiny text={item?.quantity} />
+                          </Card.Content>
+                        </Card>
+                      </>
+                    )
+                )}
+              </>
+            ))}
             <Spacer />
           </Page>
         </Portal>

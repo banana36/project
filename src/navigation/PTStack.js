@@ -8,6 +8,7 @@ import ModifyWorkoutScreen from "@screens/ModifyWorkoutScreen";
 import MyClientScreen from "@screens/MyClientScreen";
 import PtCalendarScreen from "@screens/PtCalendarScreen";
 import WorkoutScreen from "@screens/WorkoutScreen";
+import { nominalTypeHack } from "prop-types";
 import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -174,6 +175,7 @@ const PTStack = () => {
         name="Dashboard"
         component={FeedStack}
         options={({ route }) => ({
+          headerShown: false,
           tabBarVisible: getTabBarVisibility(route),
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
@@ -206,6 +208,8 @@ const PTStack = () => {
         name="Clienti"
         component={ClientStack}
         options={({ route }) => ({
+          headerShown: false,
+
           tabBarVisible: getTabBarVisibility(route),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />
@@ -216,6 +220,8 @@ const PTStack = () => {
         name="Calendario"
         component={CalendarStack}
         options={{
+          headerShown: false,
+
           // tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />
@@ -226,6 +232,8 @@ const PTStack = () => {
         name="Notifiche"
         component={ProfileStack}
         options={{
+          headerShown: false,
+
           // tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />
@@ -236,6 +244,7 @@ const PTStack = () => {
         name="Profile"
         component={ProfileStack}
         options={{
+          headerShown: false,
           // tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />

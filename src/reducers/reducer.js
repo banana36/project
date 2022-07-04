@@ -1,19 +1,19 @@
-import { GET_COLLABORATION } from "@constants/";
+import { GET_MY_CLIENTS } from "@constants/";
 
 const initialState = {
-  collaborations: {}
+  myClients: {}
 };
 // eslint-disable-next-line default-param-last
-const reducer = (state = initialState, action) => {
+const PTReducer = (state = initialState, action) => {
   console.log("DEBUG::  ~ action", action);
   switch (action.type) {
-    case GET_COLLABORATION:
+    case GET_MY_CLIENTS:
       return {
         ...state,
-        collaborations: action.payload
+        myClients: action.payload
       };
     default:
       return state;
   }
 };
-export default reducer;
+export default PTReducer;

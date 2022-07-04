@@ -1,1 +1,1 @@
-export const GET_COLLABORATION = "get_my_collaboration";
+export const GET_MY_CLIENTS = "get_my_clients";

@@ -1,4 +1,4 @@
-import { GET_COLLABORATION } from "@constants/";
+import { GET_MY_CLIENTS } from "@constants/";
 import firestore, { firebase } from "@react-native-firebase/firestore";
 import moment from "moment";
 import { store } from "../../App";
@@ -53,7 +53,7 @@ export const getMyClients = async (user) => {
           }
           console.log("QUERY --> getMyClients", list);
           store.dispatch({
-            type: GET_COLLABORATION,
+            type: GET_MY_CLIENTS,
             payload: list
           });
         });
@@ -277,6 +277,7 @@ export const getMyCollaborations = async (userId, cb) => {
       .then((querySnapshot) => {
         querySnapshot.forEach((collaboration) => {
           const { clientId } = collaboration.data();
+          console.log("DEBUG::  ~ collaboration.data()", collaboration.data());
           if (clientId === userId) {
             list.push({
               ...collaboration.data(),

@@ -13,7 +13,7 @@ const MyClientScreen = ({ navigation }) => {
   const focused = useIsFocused();
   const { user } = useContext(AuthContext);
 
-  const { collaborations } = useSelector((state) => state.collaboration);
+  const { myClients } = useSelector((state) => state.PTReducer);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -37,7 +37,7 @@ const MyClientScreen = ({ navigation }) => {
         />
         <Spacer />
         <FlatList
-          data={collaborations}
+          data={myClients}
           renderItem={({ item }) => (
             <ClientCard item={item} navigation={navigation} />
           )}
